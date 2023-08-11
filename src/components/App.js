@@ -11,6 +11,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isPopupWithImageOpen, setIsPopupWithImageOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
@@ -31,10 +32,11 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
-  // function handleCardClick(card) {
-  //   setSelectedCard(card);
-  //   setPopupWithImageOpen(true);
-  // }
+  function handleCardClick(card) {
+    setSelectedCard(card);
+    setIsPopupWithImageOpen(true);
+  }
+
 
   return (
     <div className="body">
@@ -44,7 +46,7 @@ function App() {
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
-          // onCardClick={handleCardClick}
+          onCardClick={handleCardClick}
         />
         <Footer />
 
@@ -150,23 +152,12 @@ function App() {
           onClose={closeAllPopups}
         />
 
-        <PopupWithImage />
+        <PopupWithImage
+          card={selectedCard}
+          isOpen={isPopupWithImageOpen}
+          onClose={closeAllPopups}
+        />
 
-
-
-        <template className="element-template">
-          <div className="element">
-            <img className="element__image" src=" " alt="" />
-            <button className="element__remove" type="button" aria-label="Удалить карточку"></button>
-            <div className="element__info">
-              <h2 className="element__title"></h2>
-              <div className="element__like-group">
-                <button className="element__like" type="button" aria-label="Поставить лайк"></button>
-                <p className="element__like-count"></p>
-              </div>
-            </div>
-          </div>
-        </template>
       </div>
     </div>
   );

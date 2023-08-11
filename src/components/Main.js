@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../utils/api";
+import Card from "./Card";
 
 function Main(props) {
 
@@ -60,25 +61,11 @@ function Main(props) {
 
       <section className="elements">
         {cards.map((card) => (
-          <div className="element" key={card._id}>
-            <img className="element__image" src={card.link} alt={card.name} />
-            <button
-              className="element__remove"
-              type="button"
-              aria-label="Удалить карточку"
-            ></button>
-            <div className="element__info">
-              <h2 className="element__title">{card.name}</h2>
-              <div className="element__like-group">
-                <button
-                  className="element__like"
-                  type="button"
-                  aria-label="Поставить лайк"
-                ></button>
-                <p className="element__like-count">{card.likes.length}</p>
-              </div>
-            </div>
-          </div>
+          <Card 
+          key={card._id} 
+          card={card}
+          onClick={props.onCardClick}
+          />
         ))}
       </section>
 
