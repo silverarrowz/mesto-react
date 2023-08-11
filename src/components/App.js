@@ -8,38 +8,54 @@ function App() {
   return (
     <div className="body">
       <div className="page">
-    <Header />
-    <Main />
-    <Footer />
+        <Header />
+        <Main />
+        <Footer />
+
+        <PopupWithForm
+          name="profile-edit"
+          title="Редактировать профиль" />
+
+        <PopupWithForm
+          name="avatar-edit"
+          title="Обновить аватар" />
+
+        <PopupWithForm
+          name="new-card"
+          title="Новое место" />
+
+        <PopupWithForm
+          name="card-delete"
+          title="Вы уверены?" />
 
 
-      <section class="popup popup_type_image-preview">
-        <div class="popup__image-preview">
-          <button class="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
+        <section class="popup popup_type_image-preview">
+          <div class="popup__image-preview">
+            <button class="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
 
-          <figure class="popup__image-block">
-            <img class="popup__image" src=" " alt=" " />
-            <figcaption class="popup__image-title"></figcaption>
-          </figure>
+            <figure class="popup__image-block">
+              <img class="popup__image" src=" " alt=" " />
+              <figcaption class="popup__image-title"></figcaption>
+            </figure>
 
-        </div>
-      </section>
+          </div>
+        </section>
 
 
-      <template class="element-template">
-        <div class="element">
-          <img class="element__image" src=" " alt="" />
-          <button class="element__remove" type="button" aria-label="Удалить карточку"></button>
-          <div class="element__info">
-            <h2 class="element__title"></h2>
-            <div class="element__like-group">
-              <button class="element__like" type="button" aria-label="Поставить лайк"></button>
-              <p class="element__like-count"></p>
+        <template class="element-template">
+          <div class="element">
+            <img class="element__image" src=" " alt="" />
+            <button class="element__remove" type="button" aria-label="Удалить карточку"></button>
+            <div class="element__info">
+              <h2 class="element__title"></h2>
+              <div class="element__like-group">
+                <button class="element__like" type="button" aria-label="Поставить лайк"></button>
+                <p class="element__like-count"></p>
+              </div>
             </div>
           </div>
-        </div>
-      </template>
-    </div>
+        </template>
+      </div>
     </div>
   );
 }

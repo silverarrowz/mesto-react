@@ -13,12 +13,12 @@ function PopupWithForm(props) {
                 <h2 className="popup__title">{props.title}</h2>
 
                 <form 
-                className={`form form_type_${props.formType}`} 
+                className={`form form_type_${props.name}`} 
                 name={props.name} 
                 noValidate>
                     {props.children}
                     <button 
-                    className={`form__save-btn form__save-btn_type_${props.formType}`} 
+                    className="form__save-btn" 
                     type="submit" 
                     name="popupBtn" 
                     aria-label={props.buttonLabel}>
