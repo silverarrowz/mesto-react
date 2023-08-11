@@ -1,6 +1,6 @@
 import React from "react";
 
-function PopupWithImage(props) {
+function ImagePopup(props) {
     return (
         <section className={`popup popup_type_image-preview ${props.isOpen && 'popup_opened'}`}>
             <div className="popup__image-preview">
@@ -24,4 +24,4 @@ function PopupWithImage(props) {
     )
 }
 
-export default PopupWithImage;
+export default ImagePopup;
