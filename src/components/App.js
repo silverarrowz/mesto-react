@@ -1,56 +1,168 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
+import PopupWithImage from "./PopupWithImage";
 
 function App() {
+
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isPopupWithImageOpen, setIsPopupWithImageOpen] = useState(false);
+
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsPopupWithImageOpen(false);
+  }
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
+
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+
+  // function handleCardClick(card) {
+  //   setSelectedCard(card);
+  //   setPopupWithImageOpen(true);
+  // }
+
   return (
     <div className="body">
       <div className="page">
         <Header />
-        <Main />
+        <Main
+          onEditAvatar={handleEditAvatarClick}
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          // onCardClick={handleCardClick}
+        />
         <Footer />
 
         <PopupWithForm
           name="profile-edit"
-          title="Редактировать профиль" />
+          title="Редактировать профиль"
+          buttonText="Сохранить"
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          children={
+            <>
+              <label className="form__field">
+                <input className="form__item form__item_user_name" type="text" id="name" name="name" value="" placeholder="Имя"
+                  minlength="2" maxlength="40" required />
+                <span className="form__error" id="name-error"></span>
+              </label>
+
+              <label className="form__field">
+                <input className="form__item form__item_user_about" type="text" id="about" name="about" value=""
+                  placeholder="О себе" minlength="2" maxlength="200" required />
+                <span className="form__error" id="about-error"></span>
+              </label>
+            </>
+          }
+        />
 
         <PopupWithForm
           name="avatar-edit"
-          title="Обновить аватар" />
+          title="Обновить аватар"
+          buttonText="Сохранить"
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          children={
+            <>
+              <input
+                className="form__item form__item_avatar-url"
+                type="url"
+                id="avatar"
+                name="link"
+                value=""
+                placeholder="Ссылка на фотографию"
+                required
+              />
+              <span
+                className="form__error form__error_field_avatar"
+                id="avatar-error">
+              </span>
+            </>
+          }
+        />
 
         <PopupWithForm
           name="new-card"
-          title="Новое место" />
+          title="Новое место"
+          buttonText="Создать"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          children={
+            <>
+              <label class="form__field">
+                <input
+                  class="form__item form__item_card_name"
+                  type="text"
+                  id="place"
+                  name="name"
+                  value=""
+                  placeholder="Название"
+                  minlength="2"
+                  maxlength="30"
+                  required
+                />
+                <span
+                  class="form__error form__error_field_place"
+                  id="place-error">
+                </span>
+              </label>
+
+              <label class="form__field">
+                <input
+                  class="form__item form__item_card_about"
+                  type="url"
+                  id="link"
+                  name="link"
+                  value=""
+                  placeholder="Ссылка на картинку"
+                  minlength="2"
+                  required
+                />
+                <span
+                  class="form__error form__error_field_link"
+                  id="link-error">
+                </span>
+              </label>
+            </>
+          }
+        />
 
         <PopupWithForm
-          name="card-delete"
-          title="Вы уверены?" />
+          name='card-delete'
+          title='Вы уверены?'
+          buttonText='Да'
+          isOpen={false}
+          onClose={closeAllPopups}
+        />
+
+        <PopupWithImage />
 
 
-        <section class="popup popup_type_image-preview">
-          <div class="popup__image-preview">
-            <button class="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
 
-            <figure class="popup__image-block">
-              <img class="popup__image" src=" " alt=" " />
-              <figcaption class="popup__image-title"></figcaption>
-            </figure>
-
-          </div>
-        </section>
-
-
-        <template class="element-template">
-          <div class="element">
-            <img class="element__image" src=" " alt="" />
-            <button class="element__remove" type="button" aria-label="Удалить карточку"></button>
-            <div class="element__info">
-              <h2 class="element__title"></h2>
-              <div class="element__like-group">
-                <button class="element__like" type="button" aria-label="Поставить лайк"></button>
-                <p class="element__like-count"></p>
+        <template className="element-template">
+          <div className="element">
+            <img className="element__image" src=" " alt="" />
+            <button className="element__remove" type="button" aria-label="Удалить карточку"></button>
+            <div className="element__info">
+              <h2 className="element__title"></h2>
+              <div className="element__like-group">
+                <button className="element__like" type="button" aria-label="Поставить лайк"></button>
+                <p className="element__like-count"></p>
               </div>
             </div>
           </div>

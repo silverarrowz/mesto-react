@@ -2,12 +2,13 @@ import React from "react";
 
 function PopupWithForm(props) {
     return (
-        <section className={`popup popup_type_${props.name}`}>
+        <section className={`popup popup_type_${props.name} ${props.isOpen && 'popup_opened'}`}>
             <div className="popup__container">
                 <button 
                 className="popup__close-btn" 
                 type="button" 
-                aria-label="закрыть окно">
+                aria-label="закрыть окно"
+                onClick={props.onClose}>
                 </button>
                 
                 <h2 className="popup__title">{props.title}</h2>
@@ -21,7 +22,7 @@ function PopupWithForm(props) {
                     className="form__save-btn" 
                     type="submit" 
                     name="popupBtn" 
-                    aria-label={props.buttonLabel}>
+                    aria-label={props.buttonText}>
                         {props.buttonText}
                     </button>
                 </form>
