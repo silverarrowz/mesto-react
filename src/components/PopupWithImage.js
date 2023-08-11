@@ -13,10 +13,10 @@ function PopupWithImage(props) {
                 <figure className="popup__image-block">
                     <img
                         className="popup__image"
-                        src={props.card.link}
-                        alt={props.card.name} />
+                        src={props.card?.link}
+                        alt={props.card?.name} />
                     <figcaption className="popup__image-title">
-                        {props.card.name}
+                        {props.card?.name}
                     </figcaption>
                 </figure>
             </div>
