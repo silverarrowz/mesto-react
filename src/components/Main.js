@@ -42,9 +42,7 @@ function Main(props) {
                 className="profile__edit-btn"
                 type="button"
                 aria-label="Редактировать профиль"
-                onClick={props.onEditProfile}>
-              </button>
-
+                onClick={props.onEditProfile} />
             </div>
             <p className="profile__about">
               {userDescription}
@@ -55,8 +53,7 @@ function Main(props) {
           className="profile__add-btn"
           type="button"
           aria-label="Добавить карточку"
-          onClick={props.onAddPlace}>
-        </button>
+          onClick={props.onAddPlace} />
       </section>
 
       <section className="elements">
@@ -68,8 +65,6 @@ function Main(props) {
           />
         ))}
       </section>
-
-
     </main>
   )
 }

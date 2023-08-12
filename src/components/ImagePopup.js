@@ -8,8 +8,7 @@ function ImagePopup(props) {
                     className="popup__close-btn"
                     type="button"
                     aria-label="Закрыть окно"
-                    onClick={props.onClose}>
-                </button>
+                    onClick={props.onClose} />
                 <figure className="popup__image-block">
                     <img
                         className="popup__image"
