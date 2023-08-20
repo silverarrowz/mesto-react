@@ -59,9 +59,16 @@ function App() {
   }
 
   function handleCardLikeClick(card) {
-    console.log("card like function");
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    api
+    .changeLikeStatus(card._id, !isLiked)
+    .then((newCard) => {
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    })
+    .catch(error => {
+      console.error(error);
+    });
   }
-
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

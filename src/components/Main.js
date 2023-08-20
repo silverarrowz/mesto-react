@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import api from "../utils/api";
+import React, { useContext } from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -44,7 +43,7 @@ function Main(props) {
         {props.cards.map((card) => (
           <Card 
           key={card._id} 
-          card={card}
+          {...card}
           onClick={props.onCardClick}
           onLikeClick={props.onCardLikeClick}
           onDeleteClick={props.onCardDeleteClick}
