@@ -55,15 +55,22 @@ function App() {
   }
 
   function handleCardDeleteClick(card) {
-    console.log("card delete function");
+    api.deleteCard(card._id)
+      .then(() => {
+        setCards(cards.filter((c) => c._id !== card._id));
+      })
+      .catch(error => {
+        console.error(error); 
+      });
   }
 
   function handleCardLikeClick(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
+    
     api
     .changeLikeStatus(card._id, !isLiked)
-    .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    .then((cardLiked) => {
+        setCards(cards.map((c) => c._id === card._id ? cardLiked : c));
     })
     .catch(error => {
       console.error(error);
