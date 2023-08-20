@@ -1,26 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import api from "../utils/api";
 import Card from "./Card";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Main(props) {
-
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getCardsData()])
-      .then(([userInfo, cardsData]) => {
-        setUserName(userInfo.name);
-        setUserDescription(userInfo.about);
-        setUserAvatar(userInfo.avatar);
-        setCards(cardsData);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main className="content">
@@ -31,13 +15,13 @@ function Main(props) {
             onClick={props.onEditAvatar}>
             <img
               className="profile__avatar"
-              src={userAvatar}
+              src={currentUser.avatar}
               alt="Аватар" />
           </button>
 
           <div className="profile__info">
             <div className="profile__info-group">
-              <h1 className="profile__name">{userName}</h1>
+              <h1 className="profile__name">{currentUser.name}</h1>
               <button
                 className="profile__edit-btn"
                 type="button"
@@ -45,7 +29,7 @@ function Main(props) {
                 onClick={props.onEditProfile} />
             </div>
             <p className="profile__about">
-              {userDescription}
+              {currentUser.about}
             </p>
           </div>
         </div>
@@ -57,11 +41,13 @@ function Main(props) {
       </section>
 
       <section className="elements">
-        {cards.map((card) => (
+        {props.cards.map((card) => (
           <Card 
           key={card._id} 
           card={card}
           onClick={props.onCardClick}
+          onLikeClick={props.onCardLikeClick}
+          onDeleteClick={props.onCardDeleteClick}
           />
         ))}
       </section>
