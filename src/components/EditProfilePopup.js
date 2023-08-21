@@ -12,7 +12,7 @@ function EditProfilePopup(props) {
     function handleNameChange(evt) {
         setName(evt.target.value);
     }
-    
+
     function handleDescriptionChange(evt) {
         setDescription(evt.target.value);
     }
@@ -48,8 +48,8 @@ function EditProfilePopup(props) {
               name="name" 
               value={name} 
               placeholder="Имя"
-              minlength="2" 
-              maxlength="40" 
+              minLength="2" 
+              maxLength="40" 
               required />
               <span className="form__error" id="name-error"></span>
             </label>
@@ -63,12 +63,11 @@ function EditProfilePopup(props) {
               name="about" 
               value={description}
               placeholder="О себе" 
-              minlength="2" 
-              maxlength="200" 
+              minLength="2" 
+              maxLength="200" 
               required />
               <span className="form__error" id="about-error"></span>
             </label>
-
           </PopupWithForm>
     )
 }
