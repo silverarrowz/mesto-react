@@ -3,6 +3,8 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/api";
 
@@ -60,21 +62,42 @@ function App() {
         setCards(cards.filter((c) => c._id !== card._id));
       })
       .catch(error => {
-        console.error(error); 
+        console.error(error);
       });
   }
 
   function handleCardLikeClick(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    
     api
-    .changeLikeStatus(card._id, !isLiked)
-    .then((cardLiked) => {
+      .changeLikeStatus(card._id, !isLiked)
+      .then((cardLiked) => {
         setCards(cards.map((c) => c._id === card._id ? cardLiked : c));
-    })
-    .catch(error => {
-      console.error(error);
-    });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  function handleUpdateUser(data) {
+    api.editProfile(data)
+      .then((newUser) => {
+        setCurrentUser(newUser);
+        closeAllPopups();
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  function handleUpdateAvatar(link) {
+    api.updateAvatar(link)
+      .then((newAvatar) => {
+        setCurrentUser(newAvatar);
+        closeAllPopups();
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   return (
@@ -93,45 +116,17 @@ function App() {
           />
           <Footer />
 
-          <PopupWithForm
-            name="profile-edit"
-            title="Редактировать профиль"
-            buttonText="Сохранить"
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}>
-            <label className="form__field">
-              <input className="form__item form__item_user_name" type="text" id="name" name="name" value="" placeholder="Имя"
-                minlength="2" maxlength="40" required />
-              <span className="form__error" id="name-error"></span>
-            </label>
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+          />
 
-            <label className="form__field">
-              <input className="form__item form__item_user_about" type="text" id="about" name="about" value=""
-                placeholder="О себе" minlength="2" maxlength="200" required />
-              <span className="form__error" id="about-error"></span>
-            </label>
-          </PopupWithForm>
-
-          <PopupWithForm
-            name="avatar-edit"
-            title="Обновить аватар"
-            buttonText="Сохранить"
+          <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}>
-            <input
-              className="form__item form__item_avatar-url"
-              type="url"
-              id="avatar"
-              name="link"
-              value=""
-              placeholder="Ссылка на фотографию"
-              required
-            />
-            <span
-              className="form__error form__error_field_avatar"
-              id="avatar-error">
-            </span>
-          </PopupWithForm>
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
 
           <PopupWithForm
             name="new-card"
