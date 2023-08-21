@@ -14,4 +14,4 @@
 ----
 
 ## Ссылка на сайт проекта:
-https://silverarrowz.github.io/mesto/
+https://silverarrowz.github.io/mesto-react
